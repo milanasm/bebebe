@@ -1,6 +1,6 @@
 p=[]
 i=[]
-def Lisa_inimesi(p:list,i:list):
+def Lisa_inimesi(p:list,i:list):  #1Ã¼l
     """
     """
     while True:
@@ -16,11 +16,11 @@ def Lisa_inimesi(p:list,i:list):
                 i.append(nimi)
                 print("Andmed on lisatud")
         except:
-                print("Kirjuta ainult tähtede kasutades")
+                print("Kirjuta ainult tÃ¤htede kasutades")
     p.append(palk)
     i.append(nimi)
 
-def Kustuta_inimene(p:list,i:list):
+def Kustuta_inimene(p:list,i:list):   #2Ã¼l
     """
     """
     try:
@@ -36,9 +36,9 @@ def Kustuta_inimene(p:list,i:list):
         else:
             print("Andmed puuduvad.")
     except:
-        print("Kirjuta ainult tähtede kasutades.")
+        print("Kirjuta ainult tÃ¤htede kasutades.")
 
-def suurim_palk(p:list,i:list): #samaya bolshaya ZP
+def suurim_palk(p:list,i:list): #3 samaya bolshaya ZP
     """
     """
     suurim=max(p)
@@ -46,21 +46,21 @@ def suurim_palk(p:list,i:list): #samaya bolshaya ZP
     k=p.count(suurim)
     for j in range(k):
         indeks=p.index(suurim)
-        print(f"Saab kätte {i[indeks]}")
+        print(f"Saab kÃ¤tte {i[indeks]}")
 
-def väiksem_palk(p: list, i: list): #samaya malenkaya ZP
+def vÃ¤iksem_palk(p: list, i: list): #4 samaya malenkaya ZP
     """
     """
-    väiksem=min(p)
-    print(f"Väikseim palk on {väiksem}")
-    k=p.count(väiksem)
+    vÃ¤iksem=min(p)
+    print(f"VÃ¤ikseim palk on {vÃ¤iksem}")
+    k=p.count(vÃ¤iksem)
     for j in range(k):
-        indeks=p.index(väiksem)
-        print(f"Saab kätte {i[indeks]}")
+        indeks=p.index(vÃ¤iksem)
+        print(f"Saab kÃ¤tte {i[indeks]}")
         p.pop(indeks)
         i.pop(indeks)
 
-def Sorteerimine_acs(p:list,i:list):
+def Sorteerimine_acs(p:list,i:list): #5
     """
     """
     for n in range(0,len(i)):
@@ -70,7 +70,7 @@ def Sorteerimine_acs(p:list,i:list):
                 i[n],i[m]=i[m],i[n]
     return p,i
     
-def Sorteerimine_desc(p: list, i: list):
+def Sorteerimine_desc(p:list,i:list): #6
     """
     """
     for n in range(0, len(i)):
@@ -80,25 +80,79 @@ def Sorteerimine_desc(p: list, i: list):
                 i[n],i[m]=i[m],i[n]     
     return p, i
 
-def Omalik_palk(p: list, i: list):
+def Sama_palk(p: list, i: list):  #7Ã¼l
     """
     """
-    while True:
-        if len(p)==0 or len(i)==0:
-            print("Viga: nimekiri ei saa olla tühi.")
-            return
- 
-        palk_dict={}
-        for palk in p:
-            if palk in palk_dict:
-                palk_dict[palk]+=1
-            else:
-                palk_dict[palk]=1   
-        for palk,count in palk_dict.items():
-            if count>1:
-                print(f"Palk {palk} esineb {count} korda.")
-                print("Inimesed, kes saavad seda palka:")
-                for j in range(len(p)):
-                    if p[j]==palk:
-                        print(f"{i[j]}: {p[j]}")
-        break           
+    loetud=[]
+    for j in range(len(p)):
+        k=0
+        for l in range(len(loetud)):
+            if p[j]==loetud[l]:
+                k+=1
+        if k==0:
+            mitu=0
+            for m in range(len(p)):
+                if p[j]==p[m]:
+                    mitu+=1
+            if mitu>1:
+                print(f"Palk {p[j]} saavad {mitu} inimest:")
+                for n in range(len(p)):
+                    if p[n]==p[j]:
+                        print(f"{i[n]} - {p[n]}")
+                loetud.append(p[j])
+
+def Otsi_nime(p: list, i: list):  #8Ã¼l
+    """
+    """
+    nimi=input("Sisesta nimi: ")
+    if nimi.isalpha():
+        leitud=0
+        for j in range(len(i)):
+            if i[j]==nimi:
+                print(f"{i[j]} - {p[j]}")
+                leitud+=1
+        if leitud==0:
+            print("Sellise nimega inimest ei leitud.")
+    else:
+        print("Kirjuta ainult tÃ¤htede kasutades.")
+
+def Rohkem_kui(p:list,i:list):  #9Ã¼l
+    """
+    """
+    try:
+        summa=float(input("Sisesta summa: "))
+        for j in range(len(p)):
+            if p[j]>summa:
+                print(f"{i[j]} - {p[j]}")
+    except:
+        print("Viga! Kirjuta arv.")
+
+def Vahem_kui(p:list,i:list):
+    """
+    """
+    try:
+        summa=float(input("Sisesta summa: "))
+        for j in range(len(p)):
+            if p[j]<summa:
+                print(f"{i[j]} - {p[j]}")
+    except:
+        print("Viga! Kirjuta arv.")
+
+def Keskmine_palk(p:list,i:list):  #10Ã¼l
+    """
+    """
+    if len(p)>0:
+        keskmine=sum(p)/len(p)
+        print(f"Keskmine palk on {keskmine}")
+        k=p.count(keskmine)
+        if k>0:
+            for j in range(k):
+                indeks=p.index(keskmine)
+                print(f"Keskmist palka saab {i[indeks]}")
+                p.pop(indeks)
+                i.pop(indeks)
+        else:
+            print("Keegi ei saa tÃ¤pselt keskmist palka.")
+    else:
+        print("Andmed puuduvad.")
+
